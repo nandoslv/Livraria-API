@@ -1,11 +1,11 @@
 import express from "express";
 import cors from "cors";
 import winston from "winston";
-import conn from "./src/repositories/db.js";
-import clienteRoute from "./src/routes/cliente.route.js";
-import autorRoute from "./src/routes/autor.route.js";
-import livroRoute from "./src/routes/livro.route.js";
-import vendaRoute from "./src/routes/venda.route.js";
+import conn from "./repositories/db.js";
+import clienteRoute from "./routes/cliente.route.js";
+import autorRoute from "./routes/autor.route.js";
+import livroRoute from "./routes/livro.route.js";
+import vendaRoute from "./routes/venda.route.js";
 
 const { combine, timestamp, label, printf } = winston.format;
 const myFormat = printf(({level, message, label, timestamp}) => {
