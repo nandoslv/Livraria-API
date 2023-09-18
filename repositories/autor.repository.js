@@ -8,25 +8,13 @@ async function insertAutor(autor) {
     }
 }
 
-async function getAutores(autorId=0) {
+async function getAutor(autorId=0) {
     try {
         if(autorId){                        
-            return await Autor.findAll({
-                where: {
-                    autorId
-                }
-            });
+            return await Autor.findByPk(autorId);
         }        
         return await Autor.findAll();
         
-    } catch (error) {
-        throw error;
-    }
-}
-
-async function getAutor(id) {
-    try {
-        return await Autor.findByPk(id)        
     } catch (error) {
         throw error;
     }
@@ -36,10 +24,10 @@ async function updateAutor(autor) {
     try {
         await Autor.update(autor, {
             where:{
-                autorId: Autor.autorId
+                autorid: autor.autorId
             }
         });
-        return await getAutor(Autor.autorId);
+        return await getAutor(autor.autorId);
     } catch (error) {
         throw error;
     }   
@@ -49,7 +37,7 @@ async function deleteAutor(id) {
     try {
         await Autor.destroy({
             where:{
-                autorId: id
+                autorid: id
             }
         })
     } catch (error) {
@@ -58,8 +46,7 @@ async function deleteAutor(id) {
 }
 
 export default {
-    insertAutor,
-    getAutores,
+    insertAutor,    
     getAutor,
     updateAutor,
     deleteAutor

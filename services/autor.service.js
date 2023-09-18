@@ -5,7 +5,7 @@ async function createAutor(autor){
 }
 
 async function getAutores(){
-    return await AutorRepository.getAutores();
+    return await AutorRepository.getAutor();
 }
 
 async function getAutor(id){
@@ -13,9 +13,10 @@ async function getAutor(id){
 }
 
 async function deleteAutor(id){
-    if(await AlunoRepository.getAlunos(id).length){
-        throw new Error('Não foi possível excluir o Autor informado. Existem aluno(s) associado(s) a ele.')
-    }
+    // if(await AlunoRepository.getAlunos(id).length){
+    //     throw new Error('Não foi possível excluir o Autor informado. Existem aluno(s) associado(s) a ele.')
+    // }
+    //todo: antes de excluir um autor, verificar se existem livros cadastrados para ele. Caso exista, bloquear a exclusão
     await AutorRepository.deleteAutor(id);
 }
 

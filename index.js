@@ -34,8 +34,7 @@ app.use(cors());
 //Cria as tabelas do db automaticamente
 (async () => {
     try {
-        const resultado = await conn.sync();
-        console.log('resultado: ', resultado);
+        const resultado = await conn.sync();        
     } catch (error) {
         console.log(error);
     }

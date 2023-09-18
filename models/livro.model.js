@@ -3,7 +3,7 @@ import db from "../repositories/db.js";
 import Autor from "./autor.model.js";
 
 const Livro = db.define('livros', {
-    livroId:{
+    livroid:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -23,6 +23,6 @@ const Livro = db.define('livros', {
     }    
 }, {underscored: true});
 
-Livro.belongsTo(Autor, { foreignKey: "autorId" });
+Livro.belongsTo(Autor, { foreignKey: "autorid" });
 
 export default Livro;

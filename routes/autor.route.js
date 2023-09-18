@@ -1,11 +1,12 @@
 import express from "express";
+import AutorController from "../controllers/autor.controller.js";
 
 const router = express.Router();
 
-// router.post('/', AlunoController.createAluno);
-// router.get('/', AlunoController.getAlunos);
-// router.get('/:id', AlunoController.getAluno);
-// router.delete('/:id', AlunoController.deleteAluno);
-// router.put('/', AlunoController.updateAluno);
+router.post('/', AutorController.createAutor);
+router.get('/', AutorController.getAutores);
+router.get('/:id', AutorController.getAutor);
+router.delete('/:id', AutorController.deleteAutor);
+router.put('/', AutorController.updateAutor);
 
 export default router;

@@ -4,7 +4,7 @@ import Cliente from "./cliente.model.js";
 import Livro from "./livro.model.js";
 
 const Venda = db.define('vendas', {
-    vendaId:{
+    vendaid:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -18,9 +18,9 @@ const Venda = db.define('vendas', {
         type: Sequelize.DATE,
         allowNull: false
     },     
-}, {underscored: true});
+});
 
-Venda.belongsTo(Cliente, { foreignKey: "clienteId" });
-Venda.belongsTo(Livro, { foreignKey: "livroId" });
+Venda.belongsTo(Cliente, { foreignKey: "clienteid" });
+Venda.belongsTo(Livro, { foreignKey: "livroid" });
 
 export default Venda;

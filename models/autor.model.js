@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import db from "../repositories/db.js";
 
 const Autor = db.define('autores', {
-    autorId:{
+    autorid:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -20,6 +20,6 @@ const Autor = db.define('autores', {
         type: Sequelize.STRING,
         allowNull: false
     }
-}, {underscored: true});
+});
 
 export default Autor;

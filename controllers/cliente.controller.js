@@ -3,8 +3,11 @@ import ClienteService from "../services/cliente.service.js";
 async function createCliente(req, res, next){    
     try {
         let cliente = req.body;
-        if(!cliente.nome || !cliente.tipo || !cliente.grupoId) {
-            throw new Error('Nome, Tipo e Proprietario_Id são obrigatórios!') 
+
+        console.log(cliente)
+
+        if(!cliente.nome || !cliente.email || !cliente.telefone || !cliente.endereco || !cliente.senha) {
+            throw new Error('Nome, Email, Telefone, Endereco e Senha são obrigatórios!') 
         }
         
         const result = await ClienteService.createCliente(cliente);
@@ -30,7 +33,7 @@ async function getClientes(req, res, next){
 async function getCliente(req, res, next){
     try {
         res.send(await ClienteService.getCliente(req.params.id));
-        logger.info(`GET /cliente`);
+        logger.info(`GET /cliente/Id`);
         
     } catch (error) {
         next(error)
@@ -51,8 +54,8 @@ async function deleteCliente(req, res, next){
 async function updateCliente(req, res, next){
     try {
         let cliente = req.body;
-        if(!cliente.clienteId || !cliente.nome || !cliente.tipo || !cliente.grupoId) {
-            throw new Error('Id, Nome, tipo e Proprietario_Id são obrigatórios!') 
+        if(!cliente.clienteId || !cliente.nome || !cliente.email || !cliente.telefone || !cliente.endereco || !cliente.senha) {
+            throw new Error('Id, Nome, Email, Telefone, Endereco e Senha são obrigatórios!') 
         }
         
         const result = await ClienteService.updateCliente(cliente);

@@ -8,25 +8,17 @@ async function insertCliente(cliente) {
     }
 }
 
-async function getClientes(clienteId=0) {
+async function getCliente(clienteId=0) {
     try {
         if(clienteId){                        
-            return await Cliente.findAll({
-                where: {
-                    clienteId
-                }
+            return await Cliente.findByPk(clienteId, {                
+                attributes: { exclude: ['senha'] },
             });
         }        
-        return await Cliente.findAll();
+        return await Cliente.findAll({
+            attributes: { exclude: ['senha'] } 
+        });
         
-    } catch (error) {
-        throw error;
-    }
-}
-
-async function getCliente(id) {
-    try {
-        return await Cliente.findByPk(id)        
     } catch (error) {
         throw error;
     }
@@ -36,10 +28,12 @@ async function updateCliente(cliente) {
     try {
         await Cliente.update(cliente, {
             where:{
-                clienteId: Cliente.clienteId
+                clienteid: cliente.clienteId
             }
-        });
-        return await getCliente(Cliente.clienteId);
+        });       
+        
+        return await getCliente(cliente.clienteId);
+
     } catch (error) {
         throw error;
     }   
@@ -49,7 +43,7 @@ async function deleteCliente(id) {
     try {
         await Cliente.destroy({
             where:{
-                clienteId: id
+                clienteid: id
             }
         })
     } catch (error) {
@@ -58,8 +52,7 @@ async function deleteCliente(id) {
 }
 
 export default {
-    insertCliente,
-    getClientes,
+    insertCliente,    
     getCliente,
     updateCliente,
     deleteCliente

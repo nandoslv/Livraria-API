@@ -3,8 +3,8 @@ import AutorService from "../services/autor.service.js";
 async function createAutor(req, res, next){    
     try {
         let autor = req.body;
-        if(!autor.nome || !autor.tipo || !autor.grupoId) {
-            throw new Error('Nome, Tipo e Proprietario_Id são obrigatórios!') 
+        if(!autor.nome || !autor.telefone || !autor.email) {
+            throw new Error('Nome, Email e Telefone são obrigatórios!') 
         }
         
         const result = await AutorService.createAutor(autor);
@@ -51,9 +51,9 @@ async function deleteAutor(req, res, next){
 async function updateAutor(req, res, next){
     try {
         let autor = req.body;
-        if(!autor.autorId || !autor.nome || !autor.tipo || !autor.grupoId) {
-            throw new Error('Id, Nome, tipo e Proprietario_Id são obrigatórios!') 
-        }
+        if(!autor.autorId || !autor.nome || !autor.telefone || !autor.email) {
+            throw new Error('Id, Nome, Email e Telefone são obrigatórios!') 
+        }       
         
         const result = await AutorService.updateAutor(autor);
         res.send(result);

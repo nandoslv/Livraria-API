@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import db from "../repositories/db.js";
 
 const Cliente = db.define('clientes', {
-    clienteId:{
+    clienteid:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -29,6 +29,6 @@ const Cliente = db.define('clientes', {
         type: Sequelize.STRING,
         allowNull: false
     }, 
-}, {underscored: true});
+});
 
 export default Cliente;

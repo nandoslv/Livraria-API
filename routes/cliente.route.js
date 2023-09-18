@@ -1,11 +1,12 @@
 import express from "express";
+import ClienteController from "../controllers/cliente.controller.js";
 
 const router = express.Router();
 
-// router.post('/', AlunoController.createAluno);
-// router.get('/', AlunoController.getAlunos);
-// router.get('/:id', AlunoController.getAluno);
-// router.delete('/:id', AlunoController.deleteAluno);
-// router.put('/', AlunoController.updateAluno);
+router.post('/', ClienteController.createCliente);
+router.get('/', ClienteController.getClientes);
+router.get('/:id', ClienteController.getCliente);
+router.delete('/:id', ClienteController.deleteCliente);
+router.put('/', ClienteController.updateCliente);
 
 export default router;
