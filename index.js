@@ -6,6 +6,8 @@ import clienteRoute from "./routes/cliente.route.js";
 import autorRoute from "./routes/autor.route.js";
 import livroRoute from "./routes/livro.route.js";
 import vendaRoute from "./routes/venda.route.js";
+import basicAuth from "express-basic-auth";
+import ClienteService from "./services/cliente.service.js";
 
 const { combine, timestamp, label, printf } = winston.format;
 const myFormat = printf(({level, message, label, timestamp}) => {
@@ -39,6 +41,29 @@ app.use(cors());
         console.log(error);
     }
 })();
+
+//Autenticacao
+app.use(basicAuth({
+    authorizer: async (username, password) => {        
+        let passwordMatches;        
+        let userMatches = basicAuth.safeCompare(username,'admin');
+
+        if(userMatches){            
+            passwordMatches  = basicAuth.safeCompare(password, 'admin');            
+        }else{
+            try {                
+                const cliente = await ClienteService.getClienteByEmail(username);            
+                console.log|(cliente)
+                userMatches = basicAuth.safeCompare(username,cliente.email);
+                passwordMatches  = basicAuth.safeCompare(password, cliente.senha);
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        return userMatches && passwordMatches;
+    }
+}))
 
 //ROUTES
 app.use('/cliente', clienteRoute);

@@ -57,6 +57,11 @@ async function updateCliente(req, res, next){
         if(!cliente.clienteId || !cliente.nome || !cliente.email || !cliente.telefone || !cliente.endereco || !cliente.senha) {
             throw new Error('Id, Nome, Email, Telefone, Endereco e Senha são obrigatórios!') 
         }
+
+        if((req.auth.user != "admin") &&
+        (req.auth.user != cliente.email)){
+            res.status(401).send('User not authorize!');
+        }
         
         const result = await ClienteService.updateCliente(cliente);
         res.send(result);

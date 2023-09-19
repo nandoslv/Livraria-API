@@ -12,6 +12,10 @@ async function getCliente(id){
     return await ClienteRepository.getCliente(id);
 }
 
+async function getClienteByEmail(email){
+    return await ClienteRepository.getClienteByEmail(email);
+}
+
 async function deleteCliente(id){
     // if(await AlunoRepository.getAlunos(id).length){
     //     throw new Error('Não foi possível excluir o Cliente informado. Existem aluno(s) associado(s) a ele.')
@@ -29,6 +33,7 @@ export default {
     createCliente,
     getClientes,
     getCliente,
+    getClienteByEmail,
     deleteCliente,
     updateCliente
 }
