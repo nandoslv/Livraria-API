@@ -3,8 +3,8 @@ import LivroService from "../services/livro.service.js";
 async function createLivro(req, res, next){    
     try {
         let livro = req.body;
-        if(!livro.nome || !livro.tipo || !livro.grupoId) {
-            throw new Error('Nome, Tipo e Proprietario_Id são obrigatórios!') 
+        if(!livro.nome || !livro.valor || !livro.autorid || !livro.estoque) {
+            throw new Error('Nome, Valor e AutorId são obrigatórios!') 
         }
         
         const result = await LivroService.createLivro(livro);
@@ -51,8 +51,8 @@ async function deleteLivro(req, res, next){
 async function updateLivro(req, res, next){
     try {
         let livro = req.body;
-        if(!livro.livroId || !livro.nome || !livro.tipo || !livro.grupoId) {
-            throw new Error('Id, Nome, tipo e Proprietario_Id são obrigatórios!') 
+        if(!livro.livroid || !livro.valor ) {
+            throw new Error('LivroId, Nome, Valor e AutorId são obrigatórios!') 
         }
         
         const result = await LivroService.updateLivro(livro);

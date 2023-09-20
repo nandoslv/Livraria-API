@@ -26,7 +26,7 @@ async function getLivros(livroId=0) {
 
 async function getLivro(id) {
     try {
-        return await Livro.findByPk(id)        
+        return await Livro.findByPk(id, {raw: true})        
     } catch (error) {
         throw error;
     }
@@ -34,12 +34,13 @@ async function getLivro(id) {
 
 async function updateLivro(livro) {
     try {
-        await Livro.update(livro, {
+        console.log(livro)       
+        await Livro.update({valor: livro.valor}, {
             where:{
-                livroId: Livro.livroId
+                livroid: livro.livroid
             }
         });
-        return await getLivro(Livro.livroId);
+        return await getLivro(livro.livroid);
     } catch (error) {
         throw error;
     }   
