@@ -1,3 +1,4 @@
+import clienteService from "../services/cliente.service.js";
 import ClienteService from "../services/cliente.service.js";
 
 async function createCliente(req, res, next){    
@@ -58,8 +59,9 @@ async function updateCliente(req, res, next){
             throw new Error('Id, Nome, Email, Telefone, Endereco e Senha são obrigatórios!') 
         }
 
-        if((req.auth.user != "admin") &&
-        (req.auth.user != cliente.email)){
+        const clienteDados = await clienteService.getCliente(cliente.clienteId);
+        
+        if((req.auth.user != "admin") &&  (req.auth.user != clienteDados.email)){
             res.status(401).send('User not authorize!');
         }
         

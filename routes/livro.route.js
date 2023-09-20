@@ -7,18 +7,19 @@ const router = express.Router();
 
 //Livro
 router.post('/', Authorize.authorize('admin'), LivroController.createLivro);
-router.get('/', Authorize.authorize('admin'), LivroController.getLivros);
-router.get('/:id', Authorize.authorize('admin'), LivroController.getLivro);
+router.get('/', Authorize.authorize('admin', 'cliente'), LivroController.getLivros);
+router.get('/:id', Authorize.authorize('admin', 'cliente'), LivroController.getLivro);
 router.delete('/:id', Authorize.authorize('admin'), LivroController.deleteLivro);
 router.put('/', Authorize.authorize('admin'), LivroController.updateLivro);
 
+
 //Info
-router.post('/info/', InfoController.createInfo);
-router.put('/info/', InfoController.updateInfo);
-router.get('/infos/', InfoController.getInfos);
-router.get('/info/:id', InfoController.getInfo);
-router.delete('/info/:id', InfoController.deleteInfo);
-router.post('/:id/avaliacao/', InfoController.createAvaliacao);
-router.delete('/:id/avaliacao/:index', InfoController.deleteAvaliacao);
+router.post('/info/', Authorize.authorize('admin'), InfoController.createInfo);
+router.put('/info/', Authorize.authorize('admin'), InfoController.updateInfo);
+router.get('/infos/', Authorize.authorize('admin'), InfoController.getInfos);
+router.get('/info/:id', Authorize.authorize('admin'), InfoController.getInfo);
+router.delete('/info/:id', Authorize.authorize('admin'), InfoController.deleteInfo);
+router.post('/:id/avaliacao/', Authorize.authorize('admin', 'cliente'), InfoController.createAvaliacao);
+router.delete('/:id/avaliacao/:index', Authorize.authorize('admin'), InfoController.deleteAvaliacao);
 
 export default router;

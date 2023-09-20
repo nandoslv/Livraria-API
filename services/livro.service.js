@@ -5,8 +5,12 @@ async function createLivro(livro){
     return await LivroRepository.insertLivro(livro);
 }
 
-async function getLivros(){
-    return await LivroRepository.getLivros();
+async function getLivros(autorid){
+    return await LivroRepository.getLivros(autorid);
+}
+
+async function getLivrosByAutor(autorId){
+    return await LivroRepository.getLivrosByAutor(autorId);
 }
 
 async function getLivro(id){
@@ -35,5 +39,6 @@ export default {
     getLivros,
     getLivro,
     deleteLivro,
-    updateLivro
+    updateLivro,
+    getLivrosByAutor
 }

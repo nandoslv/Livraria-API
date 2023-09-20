@@ -54,8 +54,7 @@ app.use(basicAuth({
                 passwordMatches  = basicAuth.safeCompare(password, 'admin');            
             }else{
                 try {                
-                    const cliente = await ClienteService.getClienteByEmail(username);            
-                    console.log|(cliente)
+                    const cliente = await ClienteService.getClienteByEmail(username);                                
                     userMatches = basicAuth.safeCompare(username,cliente.email);
                     passwordMatches  = basicAuth.safeCompare(password, cliente.senha);
                 } catch (error) {

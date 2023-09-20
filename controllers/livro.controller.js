@@ -18,8 +18,8 @@ async function createLivro(req, res, next){
 
 async function getLivros(req, res, next){
     try {        
-        const grupoId = req.query.grupoId? req.query.grupoId: 0;
-        res.send(await LivroService.getLivros(grupoId));
+        const autorid = req.query.autorid? req.query.autorid: 0;
+        res.send(await LivroService.getLivros(autorid));
         logger.info(`GET /livro`);
         
     } catch (error) {
@@ -69,5 +69,5 @@ export default{
     getLivros,
     getLivro,
     deleteLivro,
-    updateLivro
+    updateLivro    
 }
