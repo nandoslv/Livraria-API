@@ -1,4 +1,5 @@
 import ClienteRepository from "../repositories/cliente.repository.js"
+import VendaRepository from "../repositories/venda.repository.js";
 
 async function createCliente(cliente){
     return await ClienteRepository.insertCliente(cliente);
@@ -17,11 +18,10 @@ async function getClienteByEmail(email){
 }
 
 async function deleteCliente(id){
-    // if(await AlunoRepository.getAlunos(id).length){
-    //     throw new Error('Não foi possível excluir o Cliente informado. Existem aluno(s) associado(s) a ele.')
-    // }
-
-    //todo: antes de excluir um cliente, verificar se existem vendas cadastradas para ele. Caso exista, bloquear a exclusão     
+    let qtVendas = await VendaRepository.getVendasByClienteId(id);
+    if(qtVendas.length){
+        throw new Error('Não foi possível excluir o Cliente informado. Existem venda(s) associada(s) a ele.')
+    }    
     await ClienteRepository.deleteCliente(id);
 }
 

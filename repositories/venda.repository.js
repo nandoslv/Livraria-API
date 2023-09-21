@@ -24,6 +24,32 @@ async function getVendas(vendaId=0) {
     }
 }
 
+async function getVendasByLivroId(livroid) {
+    try {        
+        return await Venda.findAll({
+            where: {
+                livroid
+            }
+            
+        },{ raw: true });                
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function getVendasByClienteId(clienteid) {
+    try {        
+        return await Venda.findAll({
+            where: {
+                clienteid
+            }
+            
+        },{ raw: true });                
+    } catch (error) {
+        throw error;
+    }
+}
+
 async function getVenda(id) {
     try {
         return await Venda.findByPk(id)        
@@ -62,5 +88,7 @@ export default {
     getVendas,
     getVenda,
     updateVenda,
-    deleteVenda
+    deleteVenda,
+    getVendasByLivroId,
+    getVendasByClienteId
 }

@@ -1,5 +1,6 @@
 import infoRepository from "../repositories/info.repository.js";
 import LivroRepository from "../repositories/livro.repository.js"
+import VendaRepository from "../repositories/venda.repository.js";
 
 async function createLivro(livro){
     return await LivroRepository.insertLivro(livro);
@@ -21,11 +22,10 @@ async function getLivro(id){
     return {...info, ...livro};
 }
 
-async function deleteLivro(id){
-    //todo: antes de excluir um livro, verificar se existem vendas realizadas para ele. Caso exista, bloquear a exclusão
-
-    if(await AlunoRepository.getAlunos(id).length){
-        throw new Error('Não foi possível excluir o Livro informado. Existem aluno(s) associado(s) a ele.')
+async function deleteLivro(id){    
+    let qtvendas = await VendaRepository.getVendasByLivroId(id);
+    if(qtvendas.length){
+        throw new Error('Não foi possível excluir o Livro informado. Existem vendas(s) associada(s) a ele.')
     }
     await LivroRepository.deleteLivro(id);
 }

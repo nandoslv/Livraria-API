@@ -46,11 +46,25 @@ async function updateLivro(livro) {
     }
 }
 
-async function deleteLivro(id) {
+async function updateLivroEstoque(livro) {
+    try {
+        console.log(livro)
+        await Livro.update({ estoque: livro.estoque }, {
+            where: {
+                livroid: livro.livroid
+            }
+        });
+        return await getLivro(livro.livroid);
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function deleteLivro(livroid) {
     try {
         await Livro.destroy({
             where: {
-                livroId: id
+                livroid
             }
         })
     } catch (error) {
@@ -63,5 +77,6 @@ export default {
     getLivros,
     getLivro,
     updateLivro,
-    deleteLivro    
+    deleteLivro,
+    updateLivroEstoque
 }
