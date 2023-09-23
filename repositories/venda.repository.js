@@ -1,3 +1,4 @@
+import Livro from "../models/livro.model.js";
 import Venda from "../models/venda.model.js";
 
 async function insertVenda(venda) {
@@ -8,17 +9,25 @@ async function insertVenda(venda) {
     }
 }
 
-async function getVendas(vendaId=0) {
-    try {
-        if(vendaId){                        
-            return await Venda.findAll({
-                where: {
-                    vendaId
+async function getVendas() {
+    try {                      
+        return await Venda.findAll();               
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function getVendasByAutorId(autorid) {
+    try {        
+        return await Venda.findAll({
+            include:[{
+                model:Livro,
+                required: true,
+                where:{
+                    autorid
                 }
-            });
-        }        
-        return await Venda.findAll();
-        
+            }]            
+        });        
     } catch (error) {
         throw error;
     }
@@ -26,11 +35,10 @@ async function getVendas(vendaId=0) {
 
 async function getVendasByLivroId(livroid) {
     try {        
-        return await Venda.findAll({
+        return await Venda.findAll({            
             where: {
                 livroid
-            }
-            
+            }            
         },{ raw: true });                
     } catch (error) {
         throw error;
@@ -90,5 +98,6 @@ export default {
     updateVenda,
     deleteVenda,
     getVendasByLivroId,
-    getVendasByClienteId
+    getVendasByClienteId,
+    getVendasByAutorId  
 }

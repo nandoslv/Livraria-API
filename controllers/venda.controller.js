@@ -17,9 +17,12 @@ async function createVenda(req, res, next){
 }
 
 async function getVendas(req, res, next){
-    try {        
-        const vendaId = req.query.vendaId? req.query.vendaId: 0;
-        res.send(await VendaService.getVendas(vendaId));
+    try {                
+        const clienteId = req.query.clienteId;
+        const autorId = req.query.autorId;
+        const livroId = req.query.livroId;
+
+        res.send(await VendaService.getVendas(clienteId, autorId, livroId));
         logger.info(`GET /venda`);
         
     } catch (error) {

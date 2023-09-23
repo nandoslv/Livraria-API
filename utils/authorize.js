@@ -16,14 +16,13 @@ function authorize(...allowed) {
 
         if (req.auth.user) {
             const role = getRole(req.auth.user);
-
             if (isAllowed(role)) {
                 await next()
             } else {
-                await res.status(401).send('Role not allowed');
+                await res.status(403).send('Role not allowed');
             }
         } else {
-            await res.status(403).send('User not found');
+            await res.status(401).send('User not found');
         }
     }
 }

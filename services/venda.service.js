@@ -15,8 +15,16 @@ async function createVenda(venda){
     return vendaRealizada;
 }
 
-async function getVendas(){
-    return await VendaRepository.getVendas();
+async function getVendas(clienteId=0, autorId=0, livroId=0){
+    if(clienteId){
+        return await VendaRepository.getVendasByClienteId(clienteId);
+    } else if(autorId){
+        return await VendaRepository.getVendasByAutorId(autorId);
+    } else if(livroId){
+        return await VendaRepository.getVendasByLivroId(livroId);
+    }else{
+        return await VendaRepository.getVendas();
+    }
 }
 
 async function getVenda(id){
